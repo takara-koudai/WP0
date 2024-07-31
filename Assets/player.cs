@@ -8,7 +8,6 @@ public class player : MonoBehaviour
     public Rigidbody rb;
     public Animator animator;
 
-
     float moveSpeed = 4f;
     float jampspeed = 8f;
 
