@@ -28,7 +28,10 @@ public class SelectPlayer : MonoBehaviour
         }
 
         //ステージ3
-
+        if(collision.gameObject.tag == "stage3Tag")
+        {
+            SceneManager.LoadScene("ThirdScene");
+        }
 
     }
 
