@@ -1,18 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 
-public class GameManagerScript : MonoBehaviour
+public class DokanStageManager : MonoBehaviour
 {
 
     public GameObject block;
-    public GameObject goal;
-    
-    //1ブロック
-    //2コイン
-    //3ゴール
 
     //マップ(ステージ)
     int[,] map =
@@ -20,19 +13,14 @@ public class GameManagerScript : MonoBehaviour
         {1,0,0,1,1,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,1,1,0,0,0,1},
-        {1,0,0,1,1,0,0,0,0,0, 0,0,1,1,0,0,0,0,0,0, 1,1,0,0,0,0,1,0,0,0, 0,0,0,0,0,0,0,0,3,1},
+        {1,0,0,1,1,0,0,0,0,0, 0,0,1,1,0,0,0,0,0,0, 1,1,0,0,0,0,1,0,0,0, 0,0,0,0,0,0,0,0,1,1},
         {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,2,0,0,0,0,0,0,1,1},
         {1,0,0,0,0,0,1,1,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 1,1,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0, 1,0,0,0,0,1,1,0,0,0, 0,0,0,1,1,0,0,0,0,0, 0,0,0,0,0,1,1,0,0,1},
         {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,1,1,0,0, 0,0,0,0,1,0,0,0,0,1},
-        {2,0,0,0,0,0,0,0,0,0, 0,0,2,0,0,0,0,0,0,0, 0,1,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0, 0,0,1,0,0,0,0,0,0,0, 0,1,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1},
         {1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 0,0,1,1,0,0,1,1,0,1, 0,0,1,0,0,1,1,1,1,1},
     };
-
-    //void GatMap()
-    //{
-    //    map.Initialize();
-    //}
 
     // Start is called before the first frame update
     void Start()
@@ -61,33 +49,19 @@ public class GameManagerScript : MonoBehaviour
                     Instantiate(block, position, Quaternion.identity);
                 }
                 //ゴール
-                if (map[y, x] == 3)
-                {
-                    goal.transform.position = position;
+                //if (map[y, x] == 3)
+                //{
+                //    goal.transform.position = position;
 
-                    //GoalParticle.transform.position = position;
-                }
+                //    //GoalParticle.transform.position = position;
+                //}
             }
         }
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        //ゴールしてSpaceを押すとタイトルへ戻る
-        if (GoalScript.isGameClear == true)
-        {
-            //スペースを押すとタイトルへ
-            if (Input.GetKey(KeyCode.Space))
-            {
-                SceneManager.LoadScene("TitleScene");
-                //スコアリセット
-                //score = 0;
-            }
-        }
-
-
-
+        
     }
 }
