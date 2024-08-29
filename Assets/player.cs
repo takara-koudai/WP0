@@ -25,6 +25,17 @@ public class player : MonoBehaviour
         isJamp = false;
     }
 
+    //コインの当たり判定
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Coin")
+        {
+            other.gameObject.SetActive(false);
+            //スコアが増える
+            GameManagerScript.score += 1;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

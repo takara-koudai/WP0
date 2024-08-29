@@ -1,25 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class DokanStageManager : MonoBehaviour
 {
 
     public GameObject block;
+    public TextMeshProUGUI scoreText;
+    public GameObject goal;
+    public GameObject coin;
+
+    public static int score = 0;
 
     //マップ(ステージ)
     int[,] map =
     {
-        {1,0,0,1,1,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,1,1,0,0,0,1},
-        {1,0,0,1,1,0,0,0,0,0, 0,0,1,1,0,0,0,0,0,0, 1,1,0,0,0,0,1,0,0,0, 0,0,0,0,0,0,0,0,1,1},
-        {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,2,0,0,0,0,0,0,1,1},
-        {1,0,0,0,0,0,1,1,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 1,1,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0, 1,0,0,0,0,1,1,0,0,0, 0,0,0,1,1,0,0,0,0,0, 0,0,0,0,0,1,1,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,1,1,0,0, 0,0,0,0,1,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0, 0,0,1,0,0,0,0,0,0,0, 0,1,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 0,0,1,1,0,0,1,1,0,1, 0,0,1,0,0,1,1,1,1,1},
+        {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,2,2,0,0,0,0,0, 0,0,2,0,0,0,0,0,2,1},
+        {1,0,0,1,1,0,0,0,0,0, 0,0,1,1,0,0,0,0,3,1},
+        {1,0,0,0,0,0,2,0,0,0, 0,0,0,0,0,0,0,0,1,1},
+        {1,0,0,0,0,0,1,1,0,0, 2,0,0,0,0,2,2,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0, 1,0,0,0,0,1,1,0,0,1},
+        {1,0,0,2,0,0,0,0,2,0, 0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0, 0,0,1,0,0,0,0,0,0,1},
+        {1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1},
     };
 
     // Start is called before the first frame update
@@ -31,7 +39,7 @@ public class DokanStageManager : MonoBehaviour
         Vector3 position = Vector3.zero;
 
         //ブロック描画
-        for (int x = 0; x < 40; x++)
+        for (int x = 0; x < 20; x++)
         {
             for (int y = 0; y < 10; y++)
             {
@@ -43,18 +51,19 @@ public class DokanStageManager : MonoBehaviour
                 {
                     Instantiate(block, position, Quaternion.identity);
                 }
-                //敵専用ブロック
+                //コイン
                 if (map[y, x] == 2)
                 {
-                    Instantiate(block, position, Quaternion.identity);
+                    Instantiate(coin, position, Quaternion.identity);
                 }
                 //ゴール
-                //if (map[y, x] == 3)
-                //{
-                //    goal.transform.position = position;
+                if (map[y, x] == 3)
+                {
+                    goal.transform.position = position;
 
-                //    //GoalParticle.transform.position = position;
-                //}
+                    //パーティクル(余裕があったら出す)
+                    //GoalParticle.transform.position = position;
+                }
             }
         }
     }
@@ -62,6 +71,20 @@ public class DokanStageManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        //ゴールしてSpaceを押すとタイトルへ戻る
+        if (GoalScript.isGameClear == true)
+        {
+            //スペースを押すとタイトルへ
+            if (Input.GetKey(KeyCode.Space))
+            {
+                SceneManager.LoadScene("TitleScene");
+                //スコアリセット
+                score = 0;
+                GameManagerScript.score = 0;
+            }
+        }
+
+        scoreText.text = "Score" + GameManagerScript.score;
     }
 }

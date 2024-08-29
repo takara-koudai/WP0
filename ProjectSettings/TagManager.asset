@@ -9,6 +9,8 @@ TagManager:
   - stage1Tag
   - stage2Tag
   - stage3Tag
+  - Dokan
+  - Coin
   layers:
   - Default
   - TransparentFX

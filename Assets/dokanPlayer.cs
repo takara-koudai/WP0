@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class dokanPlayer : MonoBehaviour
 {
@@ -25,6 +26,17 @@ public class dokanPlayer : MonoBehaviour
         isJamp = false;
     }
 
+    //コインの当たり判定
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Coin")//コインに当たるとコインが消える
+        {
+            other.gameObject.SetActive(false);
+            //土管のステージでもスコアを引き継いでスコアが増える
+            GameManagerScript.score += 1;
+        }
+        
+    }
 
     // Start is called before the first frame update
     void Start()

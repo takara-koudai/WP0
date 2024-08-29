@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
@@ -9,6 +10,10 @@ public class GameManagerScript : MonoBehaviour
 
     public GameObject block;
     public GameObject goal;
+    public TextMeshProUGUI scoreText;
+    public GameObject coin;
+
+    public static int score = 0;
     
     //1ブロック
     //2コイン
@@ -23,8 +28,8 @@ public class GameManagerScript : MonoBehaviour
         {1,0,0,1,1,0,0,0,0,0, 0,0,1,1,0,0,0,0,0,0, 1,1,0,0,0,0,1,0,0,0, 0,0,0,0,0,0,0,0,3,1},
         {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,2,0,0,0,0,0,0,1,1},
         {1,0,0,0,0,0,1,1,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 1,1,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0, 1,0,0,0,0,1,1,0,0,0, 0,0,0,1,1,0,0,0,0,0, 0,0,0,0,0,1,1,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,1,1,0,0, 0,0,0,0,1,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,4,0, 1,0,0,0,0,1,1,0,0,0, 0,0,0,1,1,0,0,0,0,0, 0,0,0,0,0,1,1,0,0,1},
+        {1,0,0,0,0,0,0,0,4,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,1,1,0,0, 0,0,0,0,1,0,0,0,0,1},
         {2,0,0,0,0,0,0,0,0,0, 0,0,2,0,0,0,0,0,0,0, 0,1,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1},
         {1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 0,0,1,1,0,0,1,1,0,1, 0,0,1,0,0,1,1,1,1,1},
     };
@@ -67,6 +72,13 @@ public class GameManagerScript : MonoBehaviour
 
                     //GoalParticle.transform.position = position;
                 }
+                //コイン
+                if (map[y, x] == 4)
+                {
+                    Instantiate(coin, position, Quaternion.identity);
+                }
+
+
             }
         }
 
@@ -83,11 +95,12 @@ public class GameManagerScript : MonoBehaviour
             {
                 SceneManager.LoadScene("TitleScene");
                 //スコアリセット
-                //score = 0;
+                score = 0;
             }
         }
 
-
+        //コインに当たるとスコアが増える
+        scoreText.text = "Score" + score;
 
     }
 }

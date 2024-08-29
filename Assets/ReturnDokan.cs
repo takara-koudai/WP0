@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class dokanMoveScript : MonoBehaviour
+public class ReturnDokan : MonoBehaviour
 {
 
-    
-    //プレイヤーが土管に当たるとシーンが変わる
     private void OnCollisionEnter(Collision collision)
     {
+        //一番奥の土管に当たるとステージ1に戻る
         if(collision.gameObject.tag == "Player")
         {
-            
-            SceneManager.LoadScene("DokanScene");
+            //SceneManager.LoadScene("SampleScene");
         }
     }
-
 
     // Start is called before the first frame update
     void Start()
