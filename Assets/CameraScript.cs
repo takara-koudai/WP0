@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-    public GameObject player;
+    //public GameObject player;
+    public GameObject kariplayer;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,8 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         //スクロールとプレイヤー追跡カメラ
-        var playerPosition = player.transform.position;
+        //var playerPosition = player.transform.position;
+        var playerPosition = kariplayer.transform.position;
         var position = transform.position;
         position.x = playerPosition.x;
         position.y = playerPosition.y + 1;

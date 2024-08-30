@@ -10,7 +10,7 @@ public class dokanMoveScript : MonoBehaviour
     //プレイヤーが土管に当たるとシーンが変わる
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "kariPlayer")
         {
             
             SceneManager.LoadScene("DokanScene");

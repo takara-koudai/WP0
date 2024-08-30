@@ -331,11 +331,11 @@ GameObject:
   - component: {fileID: 831096751}
   m_Layer: 0
   m_Name: kariPlayer
-  m_TagString: Untagged
+  m_TagString: kariPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!135 &831096746
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -343,7 +343,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831096745}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 147f03ba8e4e401499ffb337b9faa3bb, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -442,7 +442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95356b00671297a40baec8b2800e4dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 831096750}
 --- !u!1 &945227660
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,7 +675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7124cf6b9b138ee4786c1b27fe1f7b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2031272869}
+  kariplayer: {fileID: 831096745}
 --- !u!1 &969873375
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,6 +797,10 @@ PrefabInstance:
     - target: {fileID: 100096, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
       propertyPath: m_Name
       value: player
+      objectReference: {fileID: 0}
+    - target: {fileID: 100096, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100096, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
       propertyPath: m_TagString

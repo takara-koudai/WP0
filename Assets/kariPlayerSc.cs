@@ -23,6 +23,16 @@ public class kariPlayerSc : MonoBehaviour
         isJamp = false;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Coin")
+        {
+            other.gameObject.SetActive(false);
+            //ÉXÉRÉAÇ™ëùÇ¶ÇÈ
+            GameManagerScript.score += 1;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

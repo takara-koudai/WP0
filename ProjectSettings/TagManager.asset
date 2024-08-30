@@ -11,6 +11,7 @@ TagManager:
   - stage3Tag
   - Dokan
   - Coin
+  - kariPlayer
   layers:
   - Default
   - TransparentFX

@@ -5,13 +5,17 @@ using UnityEngine;
 public class GoalScript : MonoBehaviour
 {
 
+    //クリアのテキスト
     public GameObject gameClearText;
 
     public static bool isGameClear = false;
 
     private void OnTriggerEnter(Collider other)
     {
+        //コールに当たると文字が表示される
         gameClearText.SetActive(true);
+
+
         isGameClear = true;
     }
 

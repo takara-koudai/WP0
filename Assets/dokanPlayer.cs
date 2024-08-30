@@ -7,7 +7,7 @@ public class dokanPlayer : MonoBehaviour
 {
 
     public Rigidbody rb;
-    public Animator animator;
+    //public Animator animator;
 
     float moveSpeed = 4f;
     float jampspeed = 8f;
@@ -18,7 +18,7 @@ public class dokanPlayer : MonoBehaviour
     {
         isJamp = true;
 
-        animator.SetBool("jamp", false);
+        //animator.SetBool("jamp", false);
     }
 
     private void OnCollisionExit(Collision collision)
@@ -55,19 +55,19 @@ public class dokanPlayer : MonoBehaviour
             v.x = moveSpeed;
             transform.rotation = Quaternion.Euler(0, 90, 0);
 
-            animator.SetBool("walk", true);
+            //animator.SetBool("walk", true);
         }
         else if (Input.GetKey(KeyCode.A))
         {
             v.x = -moveSpeed;
             transform.rotation = Quaternion.Euler(0, -90, 0);
 
-            animator.SetBool("walk", true);
+            //animator.SetBool("walk", true);
         }
         else
         {
             v.x = 0;
-            animator.SetBool("walk", false);
+            //animator.SetBool("walk", false);
         }
 
         //ÉWÉÉÉìÉvèàóù
@@ -75,11 +75,11 @@ public class dokanPlayer : MonoBehaviour
         {
             if (isJamp)
             {
-                animator.SetBool("jamp", true);
+                //animator.SetBool("jamp", true);
             }
             else
             {
-                animator.SetBool("jamp", false);
+                //animator.SetBool("jamp", false);
             }
 
             v.y = jampspeed;

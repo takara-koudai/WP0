@@ -15,6 +15,11 @@ public class DokanStageManager : MonoBehaviour
 
     public static int score = 0;
 
+    
+
+    //2コイン
+    //3ゴール
+
     //マップ(ステージ)
     int[,] map =
     {
@@ -26,7 +31,7 @@ public class DokanStageManager : MonoBehaviour
         {1,0,0,0,0,0,1,1,0,0, 2,0,0,0,0,2,2,0,0,1},
         {1,0,0,0,0,0,0,0,0,0, 1,0,0,0,0,1,1,0,0,1},
         {1,0,0,2,0,0,0,0,2,0, 0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0, 0,0,1,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0, 0,0,1,0,0,0,0,2,0,1},
         {1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1},
     };
 
@@ -72,7 +77,7 @@ public class DokanStageManager : MonoBehaviour
     void Update()
     {
 
-        //ゴールしてSpaceを押すとタイトルへ戻る
+        //ゴールしてSpaceを押すとタイトルへ戻る(クリア版)
         if (GoalScript.isGameClear == true)
         {
             //スペースを押すとタイトルへ
@@ -84,6 +89,8 @@ public class DokanStageManager : MonoBehaviour
                 GameManagerScript.score = 0;
             }
         }
+
+        
 
         scoreText.text = "Score" + GameManagerScript.score;
     }

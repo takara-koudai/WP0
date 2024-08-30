@@ -11,13 +11,16 @@ public class GameManagerScript : MonoBehaviour
     public GameObject block;
     public GameObject goal;
     public TextMeshProUGUI scoreText;
+    //public TextMeshProUGUI timeText;
     public GameObject coin;
 
     public static int score = 0;
-    
+
+    public static int timer = 0;
+
     //1ブロック
-    //2コイン
-    //3ゴール
+    //2敵専用のブロック
+    //4コイン
 
     //マップ(ステージ)
     int[,] map =
@@ -25,19 +28,14 @@ public class GameManagerScript : MonoBehaviour
         {1,0,0,1,1,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,1,1,0,0,0,1},
-        {1,0,0,1,1,0,0,0,0,0, 0,0,1,1,0,0,0,0,0,0, 1,1,0,0,0,0,1,0,0,0, 0,0,0,0,0,0,0,0,3,1},
-        {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,2,0,0,0,0,0,0,1,1},
-        {1,0,0,0,0,0,1,1,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 1,1,0,0,0,0,0,0,0,1},
+        {1,0,0,1,1,0,0,0,0,0, 0,0,1,1,0,0,0,0,0,0, 1,1,0,0,0,0,1,0,0,0, 0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,4,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,2,0,0,0,0,0,0,1,1},
+        {1,0,0,0,0,0,0,1,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 1,1,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,4,0, 1,0,0,0,0,1,1,0,0,0, 0,0,0,1,1,0,0,0,0,0, 0,0,0,0,0,1,1,0,0,1},
         {1,0,0,0,0,0,0,0,4,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,1,1,0,0, 0,0,0,0,1,0,0,0,0,1},
         {2,0,0,0,0,0,0,0,0,0, 0,0,2,0,0,0,0,0,0,0, 0,1,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1},
         {1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 0,0,1,1,0,0,1,1,0,1, 0,0,1,0,0,1,1,1,1,1},
     };
-
-    //void GatMap()
-    //{
-    //    map.Initialize();
-    //}
 
     // Start is called before the first frame update
     void Start()
@@ -66,22 +64,19 @@ public class GameManagerScript : MonoBehaviour
                     Instantiate(block, position, Quaternion.identity);
                 }
                 //ゴール
-                if (map[y, x] == 3)
-                {
-                    goal.transform.position = position;
-
-                    //GoalParticle.transform.position = position;
-                }
+                //if (map[y, x] == 3)
+                //{
+                //    goal.transform.position = position;
+                //
+                //    //GoalParticle.transform.position = position;
+                //}
                 //コイン
                 if (map[y, x] == 4)
                 {
                     Instantiate(coin, position, Quaternion.identity);
                 }
-
-
             }
         }
-
     }
 
     // Update is called once per frame
@@ -99,8 +94,14 @@ public class GameManagerScript : MonoBehaviour
             }
         }
 
-        //コインに当たるとスコアが増える
+
+        //timer += 1;
+
+        //コインに当たるとスコアが増える 表示
         scoreText.text = "Score" + score;
+
+        //経過タイム表示
+        //timeText.text = "time" + timer;
 
     }
 }
