@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class SelectPlayer : MonoBehaviour
 {
     public Rigidbody rb;
-    public Animator animator;
+    //public Animator animator;
 
     float moveSpeed = 4f;
 
@@ -25,12 +25,6 @@ public class SelectPlayer : MonoBehaviour
         if(collision.gameObject.tag == "stage2Tag")
         {
             SceneManager.LoadScene("SecondScene");
-        }
-
-        //ステージ3
-        if(collision.gameObject.tag == "stage3Tag")
-        {
-            SceneManager.LoadScene("ThirdScene");
         }
 
     }
@@ -51,35 +45,35 @@ public class SelectPlayer : MonoBehaviour
             v.x = moveSpeed;
             transform.rotation = Quaternion.Euler(0, 90, 0);
 
-            animator.SetBool("move", true);
+            //animator.SetBool("move", true);
         }
         else if (Input.GetKey(KeyCode.A))//左移動
         {
             v.x = -moveSpeed;
             transform.rotation = Quaternion.Euler(0, -90, 0);
 
-            animator.SetBool("move", true);
+            //animator.SetBool("move", true);
         }
         else if (Input.GetKey(KeyCode.W))//上移動
         {
             v.z = moveSpeed;
             transform.rotation = Quaternion.Euler(0, 0, 0);
 
-            animator.SetBool("move", true);
+            //animator.SetBool("move", true);
         }
         else if (Input.GetKey(KeyCode.S))//下移動
         {
             v.z = -moveSpeed;
             transform.rotation = Quaternion.Euler(0, 180, 0);
 
-            animator.SetBool("move", true);
+            //animator.SetBool("move", true);
         }
         else
         {
             v.x = 0;
             v.z = 0;
             transform.rotation = Quaternion.Euler(0, 180, 0);
-            animator.SetBool("move", false);
+            //animator.SetBool("move", false);
 
         }
 

@@ -15,10 +15,10 @@ public class TimeScript : MonoBehaviour
     //制限時間
     [SerializeField] int timeLimit;
 
-    //タイマー用のテキスト
+    //タイマー用テキスト
     [SerializeField] Text timerText;
 
-    //経過時間用変数
+    //時間
     float time;
 
     // Use this for initialization
@@ -45,10 +45,10 @@ public class TimeScript : MonoBehaviour
 
             isGameOver = true;
 
-            //GoalScript.isGameClear = true;
+            time += 0;
         }
 
-        //spaceを押すとタイトルに戻る
+        //spaceを押すとタイトルに戻る(ゲームオーバー版)
         if(isGameOver == true)
         {
             if (Input.GetKey(KeyCode.Space))
@@ -60,6 +60,5 @@ public class TimeScript : MonoBehaviour
                 GameManagerScript.score = 0;
             }
         }
-
     }
 }
