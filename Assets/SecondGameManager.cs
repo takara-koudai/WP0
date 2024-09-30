@@ -1,14 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SecondGameManager : MonoBehaviour
 {
     public GameObject block;
+    public GameObject block2;
+
+    public TextMeshProUGUI scoreText;
+    //public TextMeshProUGUI timeText;
+    public GameObject coin;
+
+    public static int score = 0;
 
     //1ブロック
     //2コイン
-    //3ゴール
+    
 
     //マップ(ステージ)
     int[,] map =
@@ -22,7 +31,7 @@ public class SecondGameManager : MonoBehaviour
         {1,0,0,0,0,0,0,0,0,0, 1,0,0,0,0,1,1,0,0,0, 0,0,0,1,1,0,0,0,0,0, 0,0,0,0,2,1,1,0,0,1},
         {1,0,0,0,2,0,0,0,0,0, 0,0,2,0,0,0,0,0,0,0, 0,0,0,0,0,0,1,1,0,0, 0,0,0,0,1,0,0,0,0,1},
         {1,0,0,0,0,0,0,2,0,0, 0,0,1,0,0,2,0,0,0,0, 0,1,0,2,0,0,0,0,0,2, 0,0,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 0,0,1,1,0,0,1,1,0,1, 0,0,1,0,0,1,1,1,1,1},
+        {1,1,1,1,1,0,1,1,0,1, 1,1,1,1,1,1,1,1,1,1, 0,0,1,1,0,0,1,1,0,1, 0,0,1,0,0,1,1,1,1,1},
     };
 
     // Start is called before the first frame update
@@ -47,11 +56,11 @@ public class SecondGameManager : MonoBehaviour
                     Instantiate(block, position, Quaternion.identity);
                 }
                 //コイン
-                //if (map[y, x] == 2)
-                //{
-                //    Instantiate(coin, position, Quaternion.identity);
-                //}
-                ////ゴール
+                if (map[y, x] == 2)
+                {
+                    Instantiate(coin, position, Quaternion.identity);
+                }
+                //ゴール
                 //if (map[y, x] == 3)
                 //{
                 //    goal.transform.position = position;
@@ -65,6 +74,9 @@ public class SecondGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+
+        //コインに当たるとスコアが増える 表示
+        scoreText.text = "Score" + score;
     }
 }

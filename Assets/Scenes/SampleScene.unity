@@ -1357,7 +1357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverText: {fileID: 1049473933}
-  timeLimit: 35
+  timeLimit: 60
   timerText: {fileID: 287134500}
 --- !u!4 &1157547942
 Transform:

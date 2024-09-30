@@ -30,6 +30,8 @@ public class kariPlayerSc : MonoBehaviour
             other.gameObject.SetActive(false);
             //スコアが増える
             GameManagerScript.score += 1;
+            //ステージ2
+            SecondGameManager.score += 1;
         }
     }
 
