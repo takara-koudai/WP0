@@ -18,9 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SecondScene.unity
     guid: 789608b2b0f65ef419b1fa6911cb8947
   - enabled: 0
-    path: Assets/Scenes/ThirdScene.unity
+    path: 
     guid: f4a0177dc40179c4e89110c9d04bd084
   - enabled: 1
     path: Assets/Scenes/DokanScene.unity
     guid: 4a8b991281529ca4e90165873c75830e
+  - enabled: 1
+    path: Assets/Scenes/ThirdScene.unity
+    guid: 3d1d10730b98d7548aa04ca5c5189b74
   m_configObjects: {}

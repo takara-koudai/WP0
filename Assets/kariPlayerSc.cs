@@ -7,7 +7,7 @@ public class kariPlayerSc : MonoBehaviour
     public Rigidbody rb;
 
     float moveSpeed = 4f;
-    float jampspeed = 8f;
+    float jampspeed = 6f;
 
     private bool isJamp;
 
@@ -28,10 +28,15 @@ public class kariPlayerSc : MonoBehaviour
         if (other.gameObject.tag == "Coin")
         {
             other.gameObject.SetActive(false);
-            //スコアが増える
+            //スコアが増える(ステージ1)
             GameManagerScript.score += 1;
             //ステージ2
             SecondGameManager.score += 1;
+            //ステージ3
+            ThirdGameManagerScript.score += 1;
+
+
+
         }
     }
 

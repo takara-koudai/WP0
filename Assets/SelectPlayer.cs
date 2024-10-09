@@ -27,6 +27,13 @@ public class SelectPlayer : MonoBehaviour
             SceneManager.LoadScene("SecondScene");
         }
 
+        //ステージ3
+        if (collision.gameObject.tag == "stage3Tag")
+        {
+            SceneManager.LoadScene("ThirdScene");
+        }
+
+
     }
 
     // Start is called before the first frame update

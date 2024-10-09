@@ -1407,6 +1407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9525020b9901e4cb9edd4ec0be9ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverText: {fileID: 1049473933}
   rb: {fileID: 1206024651}
 --- !u!54 &1206024651
 Rigidbody:
