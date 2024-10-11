@@ -16,6 +16,7 @@ public class DokanStageManager : MonoBehaviour
 
     public static int score = 0;
 
+    //1ブロック
     //2コイン
     //3ゴール
 
@@ -74,7 +75,7 @@ public class DokanStageManager : MonoBehaviour
         }
 
         //背景
-        for (int y = 0; y < lenY; y++)
+        /*for (int y = 0; y < lenY; y++)
         {
             for (int x = 0; x < 1280; x++)
             {
@@ -83,7 +84,7 @@ public class DokanStageManager : MonoBehaviour
                 position.z = 3;
                 Instantiate(block2, position, Quaternion.identity);
             }
-        }
+        }*/
 
     }
 
@@ -101,13 +102,14 @@ public class DokanStageManager : MonoBehaviour
                 //スコアリセット
                 score = 0;
                 GameManagerScript.score = 0;
+
+                EnemyScript.isGameOver = false;
+                
             }
         }
         
-        //前のシーンからスコアの表示を引継ぎ
+        //前のシーンからスコアの表示を引継ぎ(土管に入る前のスコアをそのまま)
         scoreText.text = "Score" + GameManagerScript.score;
-
-
 
     }
 }

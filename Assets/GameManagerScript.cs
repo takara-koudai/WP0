@@ -14,12 +14,14 @@ public class GameManagerScript : MonoBehaviour
     public TextMeshProUGUI scoreText;
     //public TextMeshProUGUI timeText;
     public GameObject coin;
+    public GameObject Item;
 
     public static int score = 0;
 
     //1ブロック
     //2敵専用のブロック
     //4コイン
+    //5アイテム
 
     //コインは合計20個
 
@@ -30,8 +32,8 @@ public class GameManagerScript : MonoBehaviour
         {1,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,4,0, 0,0,0,0,0,4,0,0,0,1},
         {1,0,0,4,4,0,0,0,0,0, 0,0,4,0,0,0,0,0,0,0, 0,4,0,0,0,0,0,0,0,0, 0,0,0,0,1,1,0,0,4,1},
         {1,0,0,1,1,0,0,0,0,0, 0,0,1,1,0,0,0,0,0,0, 1,1,0,0,0,0,1,4,0,0, 0,0,0,0,0,0,0,0,4,1},
-        {1,0,0,0,0,0,0,4,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,4,0,0,4,0,0,0,1,1},
-        {1,0,0,0,0,0,0,1,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 1,1,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,5,0,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0,4,0,0,4,0,0,0,1,1},
+        {1,0,0,0,0,0,0,5,4,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 1,1,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,4,0, 1,0,0,0,0,1,1,0,0,0, 0,0,0,1,1,0,0,0,0,0, 0,0,0,0,0,1,1,0,0,1},
         {1,0,0,0,0,0,0,0,4,0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,1,1,0,0, 4,0,0,4,1,0,0,4,0,1},
         {2,0,0,0,0,0,0,0,0,0, 0,0,2,0,0,4,0,4,0,0, 0,1,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,4,1},
@@ -76,11 +78,18 @@ public class GameManagerScript : MonoBehaviour
                 {
                     Instantiate(coin, position, Quaternion.identity);
                 }
+
+                //アイテム
+                if(map[y, x] == 5)
+                {
+                    Instantiate(Item,position, Quaternion.identity);
+                }
+
             }
         }
 
         //背景
-        for(int y = 0;y < lenY; y++)
+        /*for(int y = 0;y < lenY; y++)
         {
             for(int x = 0;x < 1280; x++) 
             {
@@ -89,23 +98,16 @@ public class GameManagerScript : MonoBehaviour
                 position.z = 3;
                 Instantiate(block2, position, Quaternion.identity);
             }
-        }
+        }*/
+
+
+        //GoalScript.isGameClear = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //ゴールしてSpaceを押すとタイトルへ戻る
-        if (GoalScript.isGameClear == true)
-        {
-            //スペースを押すとタイトルへ
-            if (Input.GetKey(KeyCode.Space))
-            {
-                SceneManager.LoadScene("TitleScene");
-                //スコアリセット
-                score = 0;
-            }
-        }
+        //
 
         //コインに当たるとスコアが増える 表示
         scoreText.text = "Score" + score;

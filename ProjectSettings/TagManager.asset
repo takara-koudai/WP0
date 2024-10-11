@@ -12,6 +12,7 @@ TagManager:
   - Dokan
   - Coin
   - kariPlayer
+  - item
   layers:
   - Default
   - TransparentFX

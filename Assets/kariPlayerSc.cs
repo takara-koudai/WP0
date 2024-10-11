@@ -1,15 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class kariPlayerSc : MonoBehaviour
 {
     public Rigidbody rb;
 
+    //色を変えるために使うもの
+    public GameObject Item;
+    public Color Itemcolor;
+
     float moveSpeed = 4f;
     float jampspeed = 6f;
 
+    //ジャンプのフラグ
     private bool isJamp;
+
+    //変身に使うフラグ
+    public bool isChange = false;
 
     private void OnCollisionStay(Collision collision)
     {
@@ -25,8 +34,10 @@ public class kariPlayerSc : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //コインを取るとコインが消えてスコアが増える
         if (other.gameObject.tag == "Coin")
         {
+            //コインが消える
             other.gameObject.SetActive(false);
             //スコアが増える(ステージ1)
             GameManagerScript.score += 1;
@@ -35,10 +46,21 @@ public class kariPlayerSc : MonoBehaviour
             //ステージ3
             ThirdGameManagerScript.score += 1;
 
-
-
         }
+
+        //コインとの判定
+        if(other.gameObject.tag == "item")
+        {
+            other.gameObject.SetActive(false);
+
+            Item = other.gameObject;
+            Itemcolor = Item.GetComponent<Renderer>().material.color;
+            GetComponent<Renderer>().material.color = Itemcolor;
+        }
+
     }
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -51,41 +73,49 @@ public class kariPlayerSc : MonoBehaviour
     {
         Vector3 v = rb.velocity;
 
-        if (Input.GetKey(KeyCode.D))
+        //敵と当たると移動できなくなる(ゲームオーバーになるから)
+        if(EnemyScript.isGameOver == false)
         {
-            v.x = moveSpeed;
-            transform.rotation = Quaternion.Euler(0, 90, 0);
-
-            //animator.SetBool("walk", true);
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            v.x = -moveSpeed;
-            transform.rotation = Quaternion.Euler(0, -90, 0);
-
-            //animator.SetBool("walk", true);
-        }
-        else
-        {
-            v.x = 0;
-            //animator.SetBool("walk", false);
-        }
-
-        //ジャンプ処理
-        if (isJamp && Input.GetKey(KeyCode.Space))
-        {
-            if (isJamp)
+            if (Input.GetKey(KeyCode.D))
             {
-                //animator.SetBool("jamp", true);
+                v.x = moveSpeed;
+                transform.rotation = Quaternion.Euler(0, 90, 0);
+
+                //animator.SetBool("walk", true);
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                v.x = -moveSpeed;
+                transform.rotation = Quaternion.Euler(0, -90, 0);
+
+                //animator.SetBool("walk", true);
             }
             else
             {
-               // animator.SetBool("jamp", false);
+                v.x = 0;
+                //animator.SetBool("walk", false);
             }
 
-            v.y = jampspeed;
-        }
+            //ジャンプ処理
+            if (isJamp && Input.GetKey(KeyCode.Space))
+            {
+                if (isJamp)
+                {
+                    //animator.SetBool("jamp", true);
+                }
+                else
+                {
+                    // animator.SetBool("jamp", false);
+                }
 
-        rb.velocity = v;
+                v.y = jampspeed;
+            }
+
+            rb.velocity = v;
+
+            float dx = Input.GetAxis("Horizontal") * Time.deltaTime * 3;
+            float dy = Input.GetAxis("Vertical") * Time.deltaTime * 3;
+            transform.position = new Vector3(transform.position.x + dx, 0, transform.position.z + dy);
+        }
     }
 }

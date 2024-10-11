@@ -581,9 +581,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score
-
-    ScoreMax:20'
+  m_text: Score
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1146,7 +1144,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Game Over
 
-    Return Space'
+    Return Enter'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1605,6 +1603,7 @@ MonoBehaviour:
   goal: {fileID: 969873375}
   scoreText: {fileID: 945227662}
   coin: {fileID: 4991209298093239399, guid: f6035638d15530b4a90ebbbd047124e8, type: 3}
+  Item: {fileID: 7389003456033504145, guid: 3ac204624c1ef564090eba3b3b06b03a, type: 3}
 --- !u!4 &1730467434
 Transform:
   m_ObjectHideFlags: 0

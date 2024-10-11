@@ -33,6 +33,8 @@ public class TitleScript : MonoBehaviour
         if(Input.GetKey(KeyCode.Space))
         {
             SceneManager.LoadScene("SelectScene");
+
+            GoalScript.isGameClear = false;
         }
 
     }

@@ -51,7 +51,7 @@ public class TimeScript : MonoBehaviour
         //spaceを押すとタイトルに戻る(ゲームオーバー版)
         if(isGameOver == true)
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Return))
             {
                 SceneManager.LoadScene("TitleScene");
 
