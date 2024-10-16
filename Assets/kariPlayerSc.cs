@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,36 +33,6 @@ public class kariPlayerSc : MonoBehaviour
         isJamp = false;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        //コインを取るとコインが消えてスコアが増える
-        if (other.gameObject.tag == "Coin")
-        {
-            //コインが消える
-            other.gameObject.SetActive(false);
-            //スコアが増える(ステージ1)
-            GameManagerScript.score += 1;
-            //ステージ2
-            SecondGameManager.score += 1;
-            //ステージ3
-            ThirdGameManagerScript.score += 1;
-
-        }
-
-        //コインとの判定
-        if(other.gameObject.tag == "item")
-        {
-            other.gameObject.SetActive(false);
-
-            Item = other.gameObject;
-            Itemcolor = Item.GetComponent<Renderer>().material.color;
-            GetComponent<Renderer>().material.color = Itemcolor;
-        }
-
-    }
-
-    
-
     // Start is called before the first frame update
     void Start()
     {
@@ -74,7 +45,7 @@ public class kariPlayerSc : MonoBehaviour
         Vector3 v = rb.velocity;
 
         //敵と当たると移動できなくなる(ゲームオーバーになるから)
-        if(EnemyScript.isGameOver == false)
+        if (EnemyScript.isGameOver == false)
         {
             if (Input.GetKey(KeyCode.D))
             {
@@ -113,9 +84,49 @@ public class kariPlayerSc : MonoBehaviour
 
             rb.velocity = v;
 
+            //色変える
             float dx = Input.GetAxis("Horizontal") * Time.deltaTime * 3;
             float dy = Input.GetAxis("Vertical") * Time.deltaTime * 3;
-            transform.position = new Vector3(transform.position.x + dx, 0, transform.position.z + dy);
+            //transform.position = new Vector3(transform.position.x + dx, 0, transform.position.z + dy);
+
+            //アイテムを取るとその姿のままでいる
+            if(isChange == true)
+            {
+                //Item = other.gameObject;
+                Itemcolor = Item.GetComponent<Renderer>().material.color;
+                GetComponent<Renderer>().material.color = Itemcolor;
+            }
+
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //コインを取るとコインが消えてスコアが増える
+        if (other.gameObject.tag == "Coin")
+        {
+            //コインが消える
+            other.gameObject.SetActive(false);
+            //スコアが増える(ステージ1)
+            GameManagerScript.score += 1;
+            //ステージ2
+            SecondGameManager.score += 1;
+            //ステージ3
+            ThirdGameManagerScript.score += 1;
+
+        }
+
+        //アイテムとの判定(当たると色が変わる)
+        if (other.gameObject.tag == "item")
+        {
+            other.gameObject.SetActive(false);
+
+            isChange = true;
+
+            //色変える
+            Item = other.gameObject;
+            Itemcolor = Item.GetComponent<Renderer>().material.color;
+            GetComponent<Renderer>().material.color = Itemcolor;
         }
     }
 }
