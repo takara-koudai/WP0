@@ -11,9 +11,12 @@ public class kariPlayerSc : MonoBehaviour
     //色を変えるために使うもの
     public GameObject Item;
     public Color Itemcolor;
+    public GameObject bullet;
 
     float moveSpeed = 4f;
     float jampspeed = 6f;
+
+    int bulletTimer = 0;
 
     //ジャンプのフラグ
     private bool isJamp;
@@ -34,6 +37,34 @@ public class kariPlayerSc : MonoBehaviour
     }
 
     // Start is called before the first frame update
+
+    private void FixedUpdate()
+    {
+        if (bulletTimer == 0)
+        {
+            if (Input.GetKey(KeyCode.K))//発射
+            {
+                bulletTimer = 1;
+
+                Vector3 position = transform.position;
+                position.y += 0.2f;
+                position.z += 0.2f;
+                position.x += 1.0f;
+
+                Instantiate(bullet, position, Quaternion.identity);
+            }
+        }
+        else
+        {
+            bulletTimer++;
+            if (bulletTimer > 20)
+            {
+                bulletTimer = 0;
+            }
+        }
+
+    }
+
     void Start()
     {
         
@@ -97,8 +128,16 @@ public class kariPlayerSc : MonoBehaviour
                 GetComponent<Renderer>().material.color = Itemcolor;
             }
 
+            //変身してる状態でボタンを押すと弾が出る
+            //if(isChange == true)
+            //{
+            //
+            //}
+
         }
     }
+
+    
 
     private void OnTriggerEnter(Collider other)
     {
