@@ -9,9 +9,20 @@ public class bulletScript : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
+        //“yŠÇ‚É“–‚½‚é‚Æ’e‚ªÁ‚¦‚é
         if(collision.gameObject.tag == "Dokan")
         {
             Destroy(gameObject);
+        }
+
+        //’e‚Æ“yŠÇ‚ª“–‚½‚é‚Æ“G‚ªÁ‚¦‚é
+        if (collision.gameObject.tag == "enemy")
+        {
+            Destroy(collision.gameObject);
+            Destroy(this.gameObject);
+
+            //“G‚ğ“|‚·‚ÆƒXƒRƒA‚ª‘‚¦‚é
+            GameManagerScript.score += 1;
         }
     }
 

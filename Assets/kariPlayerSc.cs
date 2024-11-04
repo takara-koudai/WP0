@@ -22,7 +22,7 @@ public class kariPlayerSc : MonoBehaviour
     private bool isJamp;
 
     //変身に使うフラグ
-    public bool isChange = false;
+    public static bool isChange = false;
 
     private void OnCollisionStay(Collision collision)
     {
@@ -38,30 +38,34 @@ public class kariPlayerSc : MonoBehaviour
 
     // Start is called before the first frame update
 
-    private void FixedUpdate()
+    private void FixedUpdate()//弾を撃つ処理
     {
-        if (bulletTimer == 0)
+        if(isChange == true)
         {
-            if (Input.GetKey(KeyCode.K))//発射
+            if (bulletTimer == 0)
             {
-                bulletTimer = 1;
+                if (Input.GetKey(KeyCode.K))//発射
+                {
+                    bulletTimer = 1;
 
-                Vector3 position = transform.position;
-                position.y += 0.2f;
-                position.z += 0.2f;
-                position.x += 1.0f;
+                    Vector3 position = transform.position;
+                    position.y += 0.2f;
+                    position.z += 0.2f;
+                    position.x += 1.0f;
 
-                Instantiate(bullet, position, Quaternion.identity);
+                    Instantiate(bullet, position, Quaternion.identity);
+                }
+            }
+            else
+            {
+                bulletTimer++;
+                if (bulletTimer > 20)
+                {
+                    bulletTimer = 0;
+                }
             }
         }
-        else
-        {
-            bulletTimer++;
-            if (bulletTimer > 20)
-            {
-                bulletTimer = 0;
-            }
-        }
+        
 
     }
 
@@ -136,9 +140,6 @@ public class kariPlayerSc : MonoBehaviour
 
         }
     }
-
-    
-
     private void OnTriggerEnter(Collider other)
     {
         //コインを取るとコインが消えてスコアが増える
@@ -153,9 +154,11 @@ public class kariPlayerSc : MonoBehaviour
             //ステージ3
             ThirdGameManagerScript.score += 1;
 
+
+
         }
 
-        //アイテムとの判定(当たると色が変わる)
+        //アイテムとの判定(当たると(isChangeがtrueになり色が変わる)
         if (other.gameObject.tag == "item")
         {
             other.gameObject.SetActive(false);

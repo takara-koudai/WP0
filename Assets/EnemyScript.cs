@@ -27,11 +27,15 @@ public class EnemyScript : MonoBehaviour
 
             //自分が消える
             //Destroy(other.gameObject);
+
             //ゲームオーバーのテキストを出す
+            //gameOverText.SetActive(true);
 
-            gameOverText.SetActive(true);
+            //フラグをtrueにする(trueになるとプレイヤーが動かなくなる)
+            //isGameOver = true;
 
-            isGameOver = true;
+            //プレイヤーを戻の状態に戻す
+            kariPlayerSc.isChange = false;
 
             //敵が消える
             //Destroy(this.gameObject);
