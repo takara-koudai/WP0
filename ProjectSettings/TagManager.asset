@@ -14,6 +14,8 @@ TagManager:
   - kariPlayer
   - item
   - bullet
+  - enemy2
+  - boxCo
   layers:
   - Default
   - TransparentFX

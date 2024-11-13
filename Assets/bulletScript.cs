@@ -15,7 +15,7 @@ public class bulletScript : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //’e‚Æ“yŠÇ‚ª“–‚½‚é‚Æ“G‚ªÁ‚¦‚é
+        //’e‚Æ“yŠÇ‚ª“–‚½‚é‚Æ’e‚ªÁ‚¦‚é
         if (collision.gameObject.tag == "enemy")
         {
             Destroy(collision.gameObject);
@@ -24,6 +24,16 @@ public class bulletScript : MonoBehaviour
             //“G‚ğ“|‚·‚ÆƒXƒRƒA‚ª‘‚¦‚é
             GameManagerScript.score += 1;
         }
+
+        //’e‚ğŒ‚‚Â“G
+        if(collision.gameObject.tag == "enemy2")
+        {
+            Destroy(collision.gameObject);
+            Destroy(this.gameObject);
+
+            GameManagerScript.score += 1;
+        }
+
     }
 
     // Start is called before the first frame update
@@ -33,7 +43,7 @@ public class bulletScript : MonoBehaviour
 
         rb.velocity = new Vector3(moveSpeed, 0, 0);
 
-        Destroy(gameObject, 3);
+        Destroy(gameObject, 2);
     }
 
     // Update is called once per frame

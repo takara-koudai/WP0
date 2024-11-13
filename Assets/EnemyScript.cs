@@ -18,7 +18,9 @@ public class EnemyScript : MonoBehaviour
     GameManagerScript gameManagerScript;
 
     float EnemySpeed = 1f;
-    
+
+    int count = 0;
+
 
     private void OnCollisionEnter(Collision other)
     {
@@ -28,14 +30,17 @@ public class EnemyScript : MonoBehaviour
             //自分が消える
             //Destroy(other.gameObject);
 
-            //ゲームオーバーのテキストを出す
-            //gameOverText.SetActive(true);
-
-            //フラグをtrueにする(trueになるとプレイヤーが動かなくなる)
-            //isGameOver = true;
+           
 
             //プレイヤーを戻の状態に戻す
             kariPlayerSc.isChange = false;
+
+            //初期状態の時に敵に当たるとゲームオーバーになる
+            if(kariPlayerSc.isChange == false)
+            {
+                gameOverText.SetActive(true);
+                isGameOver = true;//プレイヤーが動かなくなる
+            }
 
             //敵が消える
             //Destroy(this.gameObject);
@@ -59,6 +64,16 @@ public class EnemyScript : MonoBehaviour
         i.x = EnemySpeed;
 
         rb.velocity = i;
+
+
+        count++;
+
+        //敵を反射させる
+        if(count >= 200)
+        {
+            i.x *= -1;
+            count = 0;
+        }
 
         //タイトルに戻る(ゲームオーバーの文字が出たら)
         if (isGameOver == true)

@@ -111,5 +111,7 @@ public class DokanStageManager : MonoBehaviour
         //前のシーンからスコアの表示を引継ぎ(土管に入る前のスコアをそのまま)
         scoreText.text = "Score" + GameManagerScript.score;
 
+        //if()
+
     }
 }

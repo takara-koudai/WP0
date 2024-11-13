@@ -18,6 +18,10 @@ public class kariPlayerSc : MonoBehaviour
 
     int bulletTimer = 0;
 
+    //敵の弾を撃つフラグ
+    public static bool enemyBulletflag = false;
+
+
     //ジャンプのフラグ
     private bool isJamp;
 
@@ -34,6 +38,14 @@ public class kariPlayerSc : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         isJamp = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "boxCo")//手前の見えない判定に当たると敵が弾を撃つ
+        {
+            enemyBulletflag = true;
+        }
     }
 
     // Start is called before the first frame update
@@ -131,12 +143,22 @@ public class kariPlayerSc : MonoBehaviour
                 Itemcolor = Item.GetComponent<Renderer>().material.color;
                 GetComponent<Renderer>().material.color = Itemcolor;
             }
+            
+            //ボタンを押すと時間が止まる
+            if (Input.GetKey(KeyCode.P))
+            {
+                //GameManagerScript.score += 1;
 
-            //変身してる状態でボタンを押すと弾が出る
-            //if(isChange == true)
-            //{
-            //
-            //}
+                //時間を止める
+                Time.timeScale = 0;
+            }
+
+            //時間を元に戻す
+            if(Input.GetKey(KeyCode.S))
+            {
+                //時間を動かす
+                Time.timeScale = 1.0f; ;
+            }
 
         }
     }
@@ -153,8 +175,6 @@ public class kariPlayerSc : MonoBehaviour
             SecondGameManager.score += 1;
             //ステージ3
             ThirdGameManagerScript.score += 1;
-
-
 
         }
 

@@ -17,6 +17,11 @@ public class Button : MonoBehaviour
     public void OnButton()
     {
 
+        if (Input.GetKey(KeyCode.P))
+        {
+            GameManagerScript.score += 1;
+        }
+
         if(targetObject_.activeSelf)
         {
             GameManagerScript.score += 1;
