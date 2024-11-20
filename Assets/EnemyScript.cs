@@ -10,43 +10,77 @@ public class EnemyScript : MonoBehaviour
     //ゲームオーバー用テキスト
     public GameObject gameOverText;
 
+    public GameObject tartget;
+
     public static bool isGameOver = false;
 
     public Rigidbody rb;
 
     
-    GameManagerScript gameManagerScript;
+    //敵の反射
+    float EnemyRightSpeed = 1.3f;
+    float EnemyLeftSpeed = -1.3f;
+    public static bool moveRight = true;
+    public static bool moveLeft = false;
 
-    float EnemySpeed = 1f;
-
-    int count = 0;
 
 
+    //当たる方向によって効果を変える
+    //前
+    //public float frontDamage = 10f;
+    //public bool frontFlag = false;
+
+    //上
+    //public float TopDamage = 10f;
+    //public bool TopFlag = false;
+
+    //後ろ
+    //public float BackDamage = 10f;
+    //public bool BackFlag = false;
+
+    
     private void OnCollisionEnter(Collision other)
     {
+        if (kariPlayerSc.isChange == true)
+        {
+            if (other.gameObject.tag == "kariPlayer")
+            {
+                kariPlayerSc.isChange = false;
+                tartget.GetComponent<kariPlayerSc>().ChangeColorWhite(Color.white);
+            }
+        }
+
         if (other.gameObject.tag == "kariPlayer")//衝突したら敵を消す
         {
 
-            //自分が消える
-            //Destroy(other.gameObject);
-
-           
-
             //プレイヤーを戻の状態に戻す
-            kariPlayerSc.isChange = false;
+            //kariPlayerSc.isChange = false;
 
-            //初期状態の時に敵に当たるとゲームオーバーになる
-            if(kariPlayerSc.isChange == false)
+            //自分に当たると敵の色が変わり蹴れる
+            if (other.gameObject.tag == "kariPlayer")
             {
-                gameOverText.SetActive(true);
-                isGameOver = true;//プレイヤーが動かなくなる
+                // 自分自身の色を赤に変える
+                GetComponent<Renderer>().material.color = Color.red;
             }
 
-            //敵が消える
-            //Destroy(this.gameObject);
+            //初期状態の時に敵に当たるとゲームオーバーになる
+            //if (kariPlayerSc.isChange == false)
+            //{
+            //    gameOverText.SetActive(true);
+            //    //isGameOver = true;//プレイヤーが動かなくなる
+            //    EnemyScript.isGameOver = true;
+            //}
         }
-
+        
+        //土管に当たると反射する
+        if(other.gameObject.tag == "Dokan")
+        {
+            moveRight = true;
+            moveLeft = false;
+        }
     }
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -58,22 +92,23 @@ public class EnemyScript : MonoBehaviour
     void Update()
     {
 
-        //敵の移動
-        Vector3 i = rb.velocity;
-
-        i.x = EnemySpeed;
-
-        rb.velocity = i;
-
-
-        count++;
-
-        //敵を反射させる
-        if(count >= 200)
+        //敵の移動(ノコノコみたいに反射する)
+        if (moveRight == true)
         {
-            i.x *= -1;
-            count = 0;
+            Vector3 i = rb.velocity;
+
+            i.x = EnemyRightSpeed;
+
+            rb.velocity = i;
         }
+
+        if (moveLeft == true)
+        {
+            Vector3 L = rb.velocity;
+            L.x = EnemyLeftSpeed;
+            rb.velocity = L;
+        }
+
 
         //タイトルに戻る(ゲームオーバーの文字が出たら)
         if (isGameOver == true)
@@ -84,7 +119,6 @@ public class EnemyScript : MonoBehaviour
                 SceneManager.LoadScene("TitleScene");
 
                 //スコアリセット
-                //score = 0;
                 GameManagerScript.score = 0;
 
                 //死亡フラグを戻す
@@ -92,4 +126,6 @@ public class EnemyScript : MonoBehaviour
             }
         }
     }
+
+    
 }

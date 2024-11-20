@@ -19,17 +19,20 @@ public class ThrowEnemy : MonoBehaviour
     GameManagerScript gameManagerScript;
 
     //ˆê’è”ÍˆÍ‚É“ü‚é‚Æ
-    private NavMeshAgent navMeshAgent;
+    
 
     //’e‚ðŒ‚‚Âˆ—
     //int count = 0;
     int enemybulletTimer = 0;
+    
+
+    bool isb = true;
 
     private void OnCollisionEnter(Collision collision)
     {
+        //“G–{‘Ì‚ÆŽ©•ª‚ª“–‚½‚Á‚½‚Æ‚«‚Ì”»’è
         if(collision.gameObject.tag == "kariPlayer")
         {
-
             //ƒvƒŒƒCƒ„[‚ðŒ³‚Ìó‘Ô‚É
             kariPlayerSc.isChange = false;
 
@@ -37,15 +40,17 @@ public class ThrowEnemy : MonoBehaviour
             if (kariPlayerSc.isChange == false)
             {
                 gameOverText.SetActive(true);
-                isGameOver = true;
-            }
+                //isGameOver = true;
 
+                EnemyScript.isGameOver = true;
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        if(kariPlayerSc.enemyBulletflag == true)//“G‚ª’e‚ðŒ‚‚Âˆ—
+        //kariPlayerSc.enemyBulletflag == true;
+        if(isb == true)//“G‚ª’e‚ðŒ‚‚Âˆ—
         {
             if(enemybulletTimer == 0)
             {
@@ -53,14 +58,16 @@ public class ThrowEnemy : MonoBehaviour
 
                 Vector3 position = transform.position;
 
-                position.y += 1f;
+                position.y += 0.6f;
+                position.z += 0.2f;
+                position.x += 1.5f;
 
                 Instantiate(bullet, position, Quaternion.identity);
             }
             else
             {
                 enemybulletTimer++;
-                if(enemybulletTimer > 5)
+                if(enemybulletTimer > 30)
                 {
                     enemybulletTimer = 0;
                 }

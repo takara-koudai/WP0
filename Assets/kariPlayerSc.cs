@@ -17,16 +17,19 @@ public class kariPlayerSc : MonoBehaviour
     float jampspeed = 6f;
 
     int bulletTimer = 0;
-
-    //敵の弾を撃つフラグ
-    public static bool enemyBulletflag = false;
-
-
+    
     //ジャンプのフラグ
     private bool isJamp;
 
     //変身に使うフラグ
     public static bool isChange = false;
+    
+
+    //色を白に変える関数
+    public void ChangeColorWhite(Color newcolor)
+    {
+        GetComponent<Renderer>().material.color = Color.white;
+    }
 
     private void OnCollisionStay(Collision collision)
     {
@@ -42,10 +45,7 @@ public class kariPlayerSc : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "boxCo")//手前の見えない判定に当たると敵が弾を撃つ
-        {
-            enemyBulletflag = true;
-        }
+        
     }
 
     // Start is called before the first frame update
@@ -77,8 +77,6 @@ public class kariPlayerSc : MonoBehaviour
                 }
             }
         }
-        
-
     }
 
     void Start()
@@ -131,18 +129,6 @@ public class kariPlayerSc : MonoBehaviour
 
             rb.velocity = v;
 
-            //色変える
-            float dx = Input.GetAxis("Horizontal") * Time.deltaTime * 3;
-            float dy = Input.GetAxis("Vertical") * Time.deltaTime * 3;
-            //transform.position = new Vector3(transform.position.x + dx, 0, transform.position.z + dy);
-
-            //アイテムを取るとその姿のままでいる
-            if(isChange == true)
-            {
-                //Item = other.gameObject;
-                Itemcolor = Item.GetComponent<Renderer>().material.color;
-                GetComponent<Renderer>().material.color = Itemcolor;
-            }
             
             //ボタンを押すと時間が止まる
             if (Input.GetKey(KeyCode.P))
@@ -181,14 +167,12 @@ public class kariPlayerSc : MonoBehaviour
         //アイテムとの判定(当たると(isChangeがtrueになり色が変わる)
         if (other.gameObject.tag == "item")
         {
+            //アイテムが消える
             other.gameObject.SetActive(false);
 
-            isChange = true;
-
             //色変える
-            Item = other.gameObject;
-            Itemcolor = Item.GetComponent<Renderer>().material.color;
-            GetComponent<Renderer>().material.color = Itemcolor;
+            isChange = true;
+            GetComponent<Renderer>().material.color = Color.blue;
         }
     }
 }
