@@ -18,6 +18,7 @@ TagManager:
   - boxCo
   - enemy3drop
   - enemy3
+  - enemy3stop
   layers:
   - Default
   - TransparentFX

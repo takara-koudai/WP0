@@ -6,9 +6,11 @@ using DG.Tweening;
 public class enemy3Script : MonoBehaviour
 {
 
-    float dropSpeed = 1f;
+    float dropSpeed = 1.5f;
 
     public static bool dropflag = false;
+
+    public static bool stopflag = false;
 
     public void OnCollisionEnter(Collision collision)
     {
@@ -36,6 +38,11 @@ public class enemy3Script : MonoBehaviour
         if(dropflag == true)
         {
             transform.position -= new Vector3(0, dropSpeed, 0) * Time.deltaTime;
+        }
+
+        if(stopflag == true)
+        {
+            transform.position += new Vector3(0, dropSpeed, 0) * Time.deltaTime;
         }
 
     }

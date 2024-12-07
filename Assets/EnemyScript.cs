@@ -41,6 +41,7 @@ public class EnemyScript : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
+        //•Ïg‚µ‚½ó‘Ô‚Å“G‚É“–‚½‚é‚Æ‚à‚Æ‚Ìó‘Ô‚É–ß‚é
         if (kariPlayerSc.isChange == true)
         {
             if (other.gameObject.tag == "kariPlayer")

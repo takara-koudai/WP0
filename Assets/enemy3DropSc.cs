@@ -11,12 +11,13 @@ public class enemy3DropSc : MonoBehaviour
         if (other.gameObject.tag == "kariPlayer")
         {
             enemy3Script.dropflag = true;
+            
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        enemy3Script.dropflag = false;
+        
     }
 
 
